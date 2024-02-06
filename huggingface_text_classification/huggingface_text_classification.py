@@ -137,4 +137,6 @@ if __name__ == "__main__":
 
     inputs = "I love using SageMaker."
     classifier = pipeline("text-classification", model=trained_model, tokenizer=tokenizer)
-    classifier(inputs)
+
+    result = classifier(inputs)
+    print(f"result: {result}")

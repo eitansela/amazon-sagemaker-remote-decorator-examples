@@ -167,3 +167,16 @@ cython_debug/
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
+huggingface_text_classification/model/checkpoint-500/config.json
+huggingface_text_classification/model/checkpoint-500/model.safetensors
+huggingface_text_classification/model/checkpoint-500/optimizer.pt
+huggingface_text_classification/model/checkpoint-500/rng_state.pth
+huggingface_text_classification/model/checkpoint-500/scheduler.pt
+huggingface_text_classification/model/checkpoint-500/special_tokens_map.json
+huggingface_text_classification/model/checkpoint-500/tokenizer.json
+huggingface_text_classification/model/checkpoint-500/tokenizer_config.json
+huggingface_text_classification/model/checkpoint-500/trainer_state.json
+huggingface_text_classification/model/checkpoint-500/training_args.bin
+huggingface_text_classification/model/checkpoint-500/vocab.txt
+huggingface_text_classification/model/config.json
+huggingface_text_classification/model/model.safetensors
