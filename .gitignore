@@ -180,3 +180,8 @@ huggingface_text_classification/model/checkpoint-500/training_args.bin
 huggingface_text_classification/model/checkpoint-500/vocab.txt
 huggingface_text_classification/model/config.json
 huggingface_text_classification/model/model.safetensors
+huggingface_text_classification/model/special_tokens_map.json
+huggingface_text_classification/model/tokenizer.json
+huggingface_text_classification/model/tokenizer_config.json
+huggingface_text_classification/model/training_args.bin
+huggingface_text_classification/model/vocab.txt

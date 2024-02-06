@@ -139,4 +139,4 @@ if __name__ == "__main__":
     classifier = pipeline("text-classification", model=trained_model, tokenizer=tokenizer)
 
     result = classifier(inputs)
-    print(f"result: {result}")
+    print(f"*** result: {result} ***")
