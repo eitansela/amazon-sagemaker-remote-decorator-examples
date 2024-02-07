@@ -50,8 +50,8 @@ def train_hf_model(
 ):
     model_dir = "model"
 
-    train_dataset = load_from_disk(train_input_path, keep_in_memory=True)
-    test_dataset = load_from_disk(test_input_path, keep_in_memory=True)
+    train_data = load_from_disk(train_input_path, keep_in_memory=True)
+    test_data = load_from_disk(test_input_path, keep_in_memory=True)
 
     model_name = "distilbert-base-uncased"
     model = AutoModelForSequenceClassification.from_pretrained(model_name)
@@ -72,8 +72,8 @@ def train_hf_model(
         model=model,
         args=training_args,
         compute_metrics=compute_metrics,
-        train_dataset=train_dataset,
-        eval_dataset=test_dataset,
+        train_dataset=train_data,
+        eval_dataset=test_data,
         tokenizer=tokenizer,
     )
 
@@ -83,7 +83,7 @@ def train_hf_model(
     trainer.save_model(model_dir)
 
     print("Evaluating the model...")
-    eval_result = trainer.evaluate(eval_dataset=test_dataset)
+    eval_result = trainer.evaluate(eval_dataset=test_data)
 
     if s3_output_path:
         fs = s3fs.S3FileSystem()
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     train_dataset.save_to_disk(train_data_path)
     test_dataset.save_to_disk(test_data_path)
 
-    ## train the model
+    # train the model
     model_path, evaluation = train_hf_model(
         train_data_path, test_data_path, os.path.join(s3_root_folder, "run_1/output")
     )
