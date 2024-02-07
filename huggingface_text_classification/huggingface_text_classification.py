@@ -13,19 +13,20 @@ import json
 from sagemaker.remote_function import remote
 import sagemaker
 
-
 sm_session = sagemaker.Session(boto_session=boto3.session.Session(region_name="us-east-1"))
 s3_root_folder = f"s3://{sm_session.default_bucket()}/remote_function_demo/huggingface"
 settings = dict(
     sagemaker_session=sm_session,
-    role="AmazonSageMaker-ExecutionRole-20190829T190746", # REPLACE WITH YOUR OWN ROLE HERE
+    role="AmazonSageMaker-ExecutionRole-20190829T190746",  # REPLACE WITH YOUR OWN ROLE HERE
     instance_type="ml.g5.xlarge",
     dependencies='./requirements.txt',
     s3_root_uri=s3_root_folder
 )
 
+
 def tokenize(batch):
     return tokenizer(batch["text"], padding="max_length", truncation=True)
+
 
 def compute_metrics(pred):
     labels = pred.label_ids
@@ -34,17 +35,18 @@ def compute_metrics(pred):
     acc = accuracy_score(labels, preds)
     return {"accuracy": acc, "f1": f1, "precision": precision, "recall": recall}
 
+
 @remote(**settings)
 def train_hf_model(
-    train_input_path,
-    test_input_path,
-    s3_output_path=None,
-    *,
-    epochs=1,
-    train_batch_size=32,
-    eval_batch_size=64,
-    warmup_steps=500,
-    learning_rate=5e-5,
+        train_input_path,
+        test_input_path,
+        s3_output_path=None,
+        *,
+        epochs=1,
+        train_batch_size=32,
+        eval_batch_size=64,
+        warmup_steps=500,
+        learning_rate=5e-5,
 ):
     model_dir = "model"
 
@@ -93,9 +95,7 @@ def train_hf_model(
     return os.path.join(s3_output_path, model_dir), eval_result
 
 
-
 if __name__ == "__main__":
-
     # tokenizer used in preprocessing
     tokenizer_name = "distilbert-base-uncased"
 
