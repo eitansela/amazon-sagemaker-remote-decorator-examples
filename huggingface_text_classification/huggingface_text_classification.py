@@ -17,7 +17,7 @@ sm_session = sagemaker.Session(boto_session=boto3.session.Session(region_name="u
 s3_root_folder = f"s3://{sm_session.default_bucket()}/remote_function_demo/huggingface"
 settings = dict(
     sagemaker_session=sm_session,
-    role="AmazonSageMaker-ExecutionRole-20190829T190746",  # REPLACE WITH YOUR OWN ROLE HERE
+    role="AmazonSageMaker-ExecutionRole-20240207T090351",  # REPLACE WITH YOUR OWN ROLE HERE
     instance_type="ml.g5.xlarge",
     dependencies='./requirements.txt',
     s3_root_uri=s3_root_folder
@@ -130,8 +130,10 @@ if __name__ == "__main__":
     )
 
     # classify text using our trained model
+    print("Downloading the model from S3. It will take few minutes.")
     fs = s3fs.S3FileSystem()
     fs.get(model_path, "model", recursive=True)
+    print("Model downloaded successfully.")
 
     trained_model = AutoModelForSequenceClassification.from_pretrained("model")
 
